@@ -91,48 +91,58 @@ int main() {
     if (adaptiveBacklight->isSupported()) {
         status = adaptiveBacklight->registerAsService();
         if (status != OK) {
-            LOG(ERROR) << "Could not register service for LiveDisplay HAL AdaptiveBacklight Iface ("
+            // Optional interface: if it is not declared in the device VINTF
+            // manifest, registration fails. Keep serving the others instead of
+            // exiting, or clients waiting on the declared ones block forever.
+            LOG(WARNING) << "Could not register service for LiveDisplay HAL AdaptiveBacklight Iface ("
                        << status << ")";
-            goto shutdown;
         }
     }
 
     if (displayColorCalibration->isSupported()) {
         status = displayColorCalibration->registerAsService();
         if (status != OK) {
-            LOG(ERROR)
+            // Optional interface: if it is not declared in the device VINTF
+            // manifest, registration fails. Keep serving the others instead of
+            // exiting, or clients waiting on the declared ones block forever.
+            LOG(WARNING)
                 << "Could not register service for LiveDisplay HAL DisplayColorCalibration Iface ("
                 << status << ")";
-            goto shutdown;
         }
     }
 
     if (displayModes->isSupported()) {
         status = displayModes->registerAsService();
         if (status != OK) {
-            LOG(ERROR) << "Could not register service for LiveDisplay HAL DisplayModes Iface ("
+            // Optional interface: if it is not declared in the device VINTF
+            // manifest, registration fails. Keep serving the others instead of
+            // exiting, or clients waiting on the declared ones block forever.
+            LOG(WARNING) << "Could not register service for LiveDisplay HAL DisplayModes Iface ("
                        << status << ")";
-            goto shutdown;
         }
     }
 
     if (readingEnhancement->isSupported()) {
         status = readingEnhancement->registerAsService();
         if (status != OK) {
-            LOG(ERROR)
+            // Optional interface: if it is not declared in the device VINTF
+            // manifest, registration fails. Keep serving the others instead of
+            // exiting, or clients waiting on the declared ones block forever.
+            LOG(WARNING)
                 << "Could not register service for LiveDisplay HAL ReadingEnhancement Iface ("
                 << status << ")";
-            goto shutdown;
         }
     }
 
     if (sunlightEnhancement->isSupported()) {
         status = sunlightEnhancement->registerAsService();
         if (status != OK) {
-            LOG(ERROR)
+            // Optional interface: if it is not declared in the device VINTF
+            // manifest, registration fails. Keep serving the others instead of
+            // exiting, or clients waiting on the declared ones block forever.
+            LOG(WARNING)
                 << "Could not register service for LiveDisplay HAL SunlightEnhancement Iface ("
                 << status << ")";
-            goto shutdown;
         }
     }
 
